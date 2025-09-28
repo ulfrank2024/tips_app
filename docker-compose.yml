@@ -1,0 +1,59 @@
+services:
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "4000:3000"
+    env_file:
+      - ./auth-service/.env
+    container_name: auth-service
+    depends_on:
+      - postgres
+
+  tip-service:
+    build: ./tip-service
+    ports:
+      - "4001:4001"
+    env_file:
+      - ./tip-service/.env
+    container_name: tip-service
+    depends_on:
+      - tip_postgres
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: tips_app_db
+      POSTGRES_USER: tips_ulrich_2025
+      POSTGRES_PASSWORD: 123qweJesus
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./auth-service/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  tip_postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: tip_db
+      POSTGRES_USER: tip_user
+      POSTGRES_PASSWORD: tip_password
+    ports:
+      - "5434:5432"
+    volumes:
+      - tip_postgres_data:/var/lib/postgresql/data
+      - ./tip-service/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+      - tip_postgres
+
+volumes:
+  postgres_data:
+  tip_postgres_data:
