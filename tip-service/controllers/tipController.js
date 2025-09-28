@@ -182,8 +182,62 @@ const TipController = {
                     const mailOptions = {
                         from: process.env.SMTP_FROM_EMAIL,
                         to: employeeEmail,
-                        subject: `Vos pourboires pour le pool ${pool.name}`,
-                        html: `<p>Bonjour,</p><p>Vos pourboires pour la période du ${pool.start_date.toISOString().split('T')[0]} au ${pool.end_date.toISOString().split('T')[0]} (${pool.name}) s'élèvent à : <strong>${dist.distributed_amount} $</strong>.</p><p>Cordialement,</p><p>Votre équipe de gestion des pourboires</p>`,
+                        subject: `Your Tips for Pool: ${pool.name} / Vos pourboires pour la cagnotte : ${pool.name}`,
+                        html: `<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Your Tips / Vos Pourboires</title>
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td style="padding: 20px 0;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; background-color: #ffffff; border: 1px solid #cccccc;">
+                        <!-- Header -->
+                        <tr>
+                            <td align="center" style="padding: 40px 0; background-color: #1b2646ff; color: #ffffff;">
+                                <h1 style="margin: 0; font-size: 24px;">ChefTips</h1>
+                            </td>
+                        </tr>
+                        <!-- Body -->
+                        <tr>
+                            <td style="padding: 40px 30px;">
+                                <p style="text-align: center; font-style: italic; color: #888888; font-size: 12px; margin-bottom: 30px;">VERSION FRANÇAISE CI-DESSOUS</p>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">You've Received Tips!</h2>
+                                <p style="color: #555555; line-height: 1.5;">Hello,</p>
+                                <p style="color: #555555; line-height: 1.5;">Your tips for the period from <strong>${new Date(pool.start_date).toLocaleDateString('en-US')}</strong> to <strong>${new Date(pool.end_date).toLocaleDateString('en-US')}</strong> (pool: "${pool.name}") have been calculated.</p>
+                                <p style="color: #555555; line-height: 1.5;">Your share is:</p>
+                                <div style="background-color: #f0f0f0; border: 1px dashed #cccccc; padding: 20px; text-align: center; margin: 20px 0;">
+                                    <h2 style="margin: 0; font-size: 32px; letter-spacing: 4px; color: #1b2646ff;">${dist.distributed_amount} $</h2>
+                                </div>
+                                <p style="color: #555555; line-height: 1.5;">Best regards,<br/>The Tip Management Team</p>
+                                
+                                <hr style="border: 0; border-top: 1px solid #dddddd; margin: 40px 0;"/>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">Vous avez reçu des pourboires !</h2>
+                                <p style="color: #555555; line-height: 1.5;">Bonjour,</p>
+                                <p style="color: #555555; line-height: 1.5;">Vos pourboires pour la période du <strong>${new Date(pool.start_date).toLocaleDateString('fr-FR')}</strong> au <strong>${new Date(pool.end_date).toLocaleDateString('fr-FR')}</strong> (cagnotte : "${pool.name}") ont été calculés.</p>
+                                <p style="color: #555555; line-height: 1.5;">Votre part s'élève à :</p>
+                                <div style="background-color: #f0f0f0; border: 1px dashed #cccccc; padding: 20px; text-align: center; margin: 20px 0;">
+                                    <h2 style="margin: 0; font-size: 32px; letter-spacing: 4px; color: #1b2646ff;">${dist.distributed_amount} $</h2>
+                                </div>
+                                <p style="color: #555555; line-height: 1.5;">Cordialement,<br/>L'équipe de gestion des pourboires</p>
+                            </td>
+                        </tr>
+                        <!-- Footer -->
+                        <tr>
+                            <td align="center" style="padding: 20px 30px; background-color: #eeeeee;">
+                                <p style="margin: 0; color: #888888; font-size: 12px;">&copy; 2025 ChefTips. All rights reserved.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+    </html>`,
                     };
 
                     try {

@@ -73,11 +73,12 @@ const LoginScreen = ({ navigation }) => {
             if (response.token && response.user) {
                 await AsyncStorage.setItem('userToken', response.token);
                 await AsyncStorage.setItem('user', JSON.stringify(response.user));
+                // Navigate immediately on success, replacing the login screen
+                navigation.replace("MainTabs");
+            } else {
+                // Handle cases where login is successful but token/user is missing
+                throw new Error('LOGIN_FAILED_NO_TOKEN');
             }
-            console.log(t("login.successMessage"), response);
-            setModalTitle(t("common.success"));
-            setModalMessage(t("login.successMessage"));
-            setModalVisible(true);
         } catch (err) {
             const errorCode = err.message;
             console.error(t("login.errorMessage"), errorCode);
@@ -94,9 +95,7 @@ const LoginScreen = ({ navigation }) => {
 
     const handleModalClose = () => {
         setModalVisible(false);
-        if (modalTitle === t("common.success")) {
-            navigation.navigate("MainTabs");
-        }
+        // Navigation is now handled directly in handleLogin
     };
 
     return (

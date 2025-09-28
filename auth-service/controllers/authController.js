@@ -58,8 +58,60 @@ const AuthController = {
             const mailOptions = {
                 from: process.env.SMTP_FROM_EMAIL,
                 to: email,
-                subject: "Verify your account",
-                html: `<p>Your verification code is: <strong>${otp}</strong></p>`,
+                subject: "Verify Your Account / Vérifiez votre compte",
+                html: `<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Verify Your Account / Vérifiez votre compte</title>
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td style="padding: 20px 0;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; background-color: #ffffff; border: 1px solid #cccccc;">
+                        <!-- Header -->
+                        <tr>
+                            <td align="center" style="padding: 40px 0; background-color: #1b2646ff; color: #ffffff;">
+                                <h1 style="margin: 0; font-size: 24px;">ChefTips</h1>
+                            </td>
+                        </tr>
+                        <!-- Body -->
+                        <tr>
+                            <td style="padding: 40px 30px;">
+                                <p style="text-align: center; font-style: italic; color: #888888; font-size: 12px; margin-bottom: 30px;">VERSION FRANÇAISE CI-DESSOUS</p>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">Verify Your Account</h2>
+                                <p style="color: #555555; line-height: 1.5;">Hello,</p>
+                                <p style="color: #555555; line-height: 1.5;">Please use the following verification code to activate your account:</p>
+                                <div style="background-color: #f0f0f0; border: 1px dashed #cccccc; padding: 20px; text-align: center; margin: 20px 0;">
+                                    <h2 style="margin: 0; font-size: 32px; letter-spacing: 4px; color: #1b2646ff;">${otp}</h2>
+                                </div>
+                                <p style="color: #555555; line-height: 1.5;">Best regards,<br/>The ChefTips Team</p>
+                                
+                                <hr style="border: 0; border-top: 1px solid #dddddd; margin: 40px 0;"/>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">Vérifiez votre compte</h2>
+                                <p style="color: #555555; line-height: 1.5;">Bonjour,</p>
+                                <p style="color: #555555; line-height: 1.5;">Veuillez utiliser le code de vérification suivant pour activer votre compte :</p>
+                                <div style="background-color: #f0f0f0; border: 1px dashed #cccccc; padding: 20px; text-align: center; margin: 20px 0;">
+                                    <h2 style="margin: 0; font-size: 32px; letter-spacing: 4px; color: #1b2646ff;">${otp}</h2>
+                                </div>
+                                <p style="color: #555555; line-height: 1.5;">Cordialement,<br/>L'équipe ChefTips</p>
+                            </td>
+                        </tr>
+                        <!-- Footer -->
+                        <tr>
+                            <td align="center" style="padding: 20px 30px; background-color: #eeeeee;">
+                                <p style="margin: 0; color: #888888; font-size: 12px;">&copy; 2025 ChefTips. All rights reserved.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+    </html>`,
             };
             await transporter.sendMail(mailOptions);
             res.status(201).json({
@@ -90,8 +142,56 @@ const AuthController = {
             const mailOptions = {
                 from: process.env.SMTP_FROM_EMAIL,
                 to: email,
-                subject: "Bienvenue !",
-                html: `<p>Bienvenue sur notre plateforme ! Votre compte est maintenant activé.</p>`,
+                subject: "Welcome to ChefTips! / Bienvenue sur ChefTips !",
+                html: `<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Welcome / Bienvenue</title>
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td style="padding: 20px 0;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; background-color: #ffffff; border: 1px solid #cccccc;">
+                        <!-- Header -->
+                        <tr>
+                            <td align="center" style="padding: 40px 0; background-color: #1b2646ff; color: #ffffff;">
+                                <h1 style="margin: 0; font-size: 24px;">ChefTips</h1>
+                            </td>
+                        </tr>
+                        <!-- Body -->
+                        <tr>
+                            <td style="padding: 40px 30px;">
+                                <p style="text-align: center; font-style: italic; color: #888888; font-size: 12px; margin-bottom: 30px;">VERSION FRANÇAISE CI-DESSOUS</p>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">Welcome!</h2>
+                                <p style="color: #555555; line-height: 1.5;">Dear User,</p>
+                                <p style="color: #555555; line-height: 1.5;">Welcome to ChefTips! We are delighted to have you with us. Your account has been successfully activated.</p>
+                                <p style="color: #555555; line-height: 1.5;">You can now log in and start managing your tips.</p>
+                                <p style="color: #555555; line-height: 1.5;">Best regards,<br/>The ChefTips Team</p>
+                                
+                                <hr style="border: 0; border-top: 1px solid #dddddd; margin: 40px 0;"/>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">Bienvenue !</h2>
+                                <p style="color: #555555; line-height: 1.5;">Cher utilisateur,</p>
+                                <p style="color: #555555; line-height: 1.5;">Bienvenue sur ChefTips ! Nous sommes ravis de vous compter parmi nous. Votre compte a été activé avec succès.</p>
+                                <p style="color: #555555; line-height: 1.5;">Vous pouvez dès à présent vous connecter et commencer à gérer vos pourboires.</p>
+                                <p style="color: #555555; line-height: 1.5;">Cordialement,<br/>L'équipe ChefTips</p>
+                            </td>
+                        </tr>
+                        <!-- Footer -->
+                        <tr>
+                            <td align="center" style="padding: 20px 30px; background-color: #eeeeee;">
+                                <p style="margin: 0; color: #888888; font-size: 12px;">&copy; 2025 ChefTips. All rights reserved.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+    </html>`,
             };
             await transporter.sendMail(mailOptions);
             res.status(200).json({ message: "Email vérifié avec succès !" });
@@ -115,8 +215,60 @@ const AuthController = {
             const mailOptions = {
                 from: process.env.SMTP_FROM_EMAIL,
                 to: email,
-                subject: "Nouveau code de vérification",
-                html: `<p>Votre nouveau code de vérification est : <strong>${otp}</strong></p>`,
+                subject: "Your New Verification Code / Votre nouveau code de vérification",
+                html: `<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Your New Verification Code / Votre nouveau code de vérification</title>
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td style="padding: 20px 0;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; background-color: #ffffff; border: 1px solid #cccccc;">
+                        <!-- Header -->
+                        <tr>
+                            <td align="center" style="padding: 40px 0; background-color: #1b2646ff; color: #ffffff;">
+                                <h1 style="margin: 0; font-size: 24px;">ChefTips</h1>
+                            </td>
+                        </tr>
+                        <!-- Body -->
+                        <tr>
+                            <td style="padding: 40px 30px;">
+                                <p style="text-align: center; font-style: italic; color: #888888; font-size: 12px; margin-bottom: 30px;">VERSION FRANÇAISE CI-DESSOUS</p>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">New Verification Code</h2>
+                                <p style="color: #555555; line-height: 1.5;">Hello,</p>
+                                <p style="color: #555555; line-height: 1.5;">Here is your new verification code:</p>
+                                <div style="background-color: #f0f0f0; border: 1px dashed #cccccc; padding: 20px; text-align: center; margin: 20px 0;">
+                                    <h2 style="margin: 0; font-size: 32px; letter-spacing: 4px; color: #1b2646ff;">${otp}</h2>
+                                </div>
+                                <p style="color: #555555; line-height: 1.5;">Best regards,<br/>The ChefTips Team</p>
+                                
+                                <hr style="border: 0; border-top: 1px solid #dddddd; margin: 40px 0;"/>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">Nouveau code de vérification</h2>
+                                <p style="color: #555555; line-height: 1.5;">Bonjour,</p>
+                                <p style="color: #555555; line-height: 1.5;">Voici votre nouveau code de vérification :</p>
+                                <div style="background-color: #f0f0f0; border: 1px dashed #cccccc; padding: 20px; text-align: center; margin: 20px 0;">
+                                    <h2 style="margin: 0; font-size: 32px; letter-spacing: 4px; color: #1b2646ff;">${otp}</h2>
+                                </div>
+                                <p style="color: #555555; line-height: 1.5;">Cordialement,<br/>L'équipe ChefTips</p>
+                            </td>
+                        </tr>
+                        <!-- Footer -->
+                        <tr>
+                            <td align="center" style="padding: 20px 30px; background-color: #eeeeee;">
+                                <p style="margin: 0; color: #888888; font-size: 12px;">&copy; 2025 ChefTips. All rights reserved.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+    </html>`,
             };
             await transporter.sendMail(mailOptions);
             res.status(200).json({ message: "Un nouveau code a été envoyé." });
@@ -167,8 +319,62 @@ const AuthController = {
             const mailOptions = {
                 from: process.env.SMTP_FROM_EMAIL,
                 to: email,
-                subject: "Code de réinitialisation de votre mot de passe",
-                html: `<p>Votre code de réinitialisation de mot de passe est : <strong>${otp}</strong></p>`,
+                subject: "Password Reset Code / Code de réinitialisation de mot de passe",
+                html: `<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Password Reset Code / Code de réinitialisation de mot de passe</title>
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td style="padding: 20px 0;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; background-color: #ffffff; border: 1px solid #cccccc;">
+                        <!-- Header -->
+                        <tr>
+                            <td align="center" style="padding: 40px 0; background-color: #1b2646ff; color: #ffffff;">
+                                <h1 style="margin: 0; font-size: 24px;">ChefTips</h1>
+                            </td>
+                        </tr>
+                        <!-- Body -->
+                        <tr>
+                            <td style="padding: 40px 30px;">
+                                <p style="text-align: center; font-style: italic; color: #888888; font-size: 12px; margin-bottom: 30px;">VERSION FRANÇAISE CI-DESSOUS</p>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">Password Reset</h2>
+                                <p style="color: #555555; line-height: 1.5;">Hello,</p>
+                                <p style="color: #555555; line-height: 1.5;">You requested a password reset. Use the following code to reset your password:</p>
+                                <div style="background-color: #f0f0f0; border: 1px dashed #cccccc; padding: 20px; text-align: center; margin: 20px 0;">
+                                    <h2 style="margin: 0; font-size: 32px; letter-spacing: 4px; color: #1b2646ff;">${otp}</h2>
+                                </div>
+                                <p style="color: #555555; line-height: 1.5;">If you did not request this, please ignore this email.</p>
+                                <p style="color: #555555; line-height: 1.5;">Best regards,<br/>The ChefTips Team</p>
+                                
+                                <hr style="border: 0; border-top: 1px solid #dddddd; margin: 40px 0;"/>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">Réinitialisation de mot de passe</h2>
+                                <p style="color: #555555; line-height: 1.5;">Bonjour,</p>
+                                <p style="color: #555555; line-height: 1.5;">Vous avez demandé une réinitialisation de mot de passe. Utilisez le code suivant pour changer votre mot de passe :</p>
+                                <div style="background-color: #f0f0f0; border: 1px dashed #cccccc; padding: 20px; text-align: center; margin: 20px 0;">
+                                    <h2 style="margin: 0; font-size: 32px; letter-spacing: 4px; color: #1b2646ff;">${otp}</h2>
+                                </div>
+                                <p style="color: #555555; line-height: 1.5;">Si vous n'êtes pas à l'origine de cette demande, veuillez ignorer cet e-mail.</p>
+                                <p style="color: #555555; line-height: 1.5;">Cordialement,<br/>L'équipe ChefTips</p>
+                            </td>
+                        </tr>
+                        <!-- Footer -->
+                        <tr>
+                            <td align="center" style="padding: 20px 30px; background-color: #eeeeee;">
+                                <p style="margin: 0; color: #888888; font-size: 12px;">&copy; 2025 ChefTips. All rights reserved.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+    </html>`,
             };
             await transporter.sendMail(mailOptions);
             res.status(200).json({ message: "Password reset link sent successfully." });
@@ -224,8 +430,54 @@ const AuthController = {
                     const mailOptions = {
                         from: process.env.SMTP_FROM_EMAIL,
                         to: email,
-                        subject: "Vous avez été ajouté à une nouvelle équipe !",
-                        html: `<p>Bonjour,</p><p>Vous faites maintenant partie d'une nouvelle équipe. Vous pouvez vous connecter à l'application pour voir les détails.</p>`,
+                        subject: "You have been added to a new team! / Vous avez été ajouté(e) à une nouvelle équipe !",
+                        html: `<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Added to a new team / Ajouté(e) à une nouvelle équipe</title>
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td style="padding: 20px 0;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; background-color: #ffffff; border: 1px solid #cccccc;">
+                        <!-- Header -->
+                        <tr>
+                            <td align="center" style="padding: 40px 0; background-color: #1b2646ff; color: #ffffff;">
+                                <h1 style="margin: 0; font-size: 24px;">ChefTips</h1>
+                            </td>
+                        </tr>
+                        <!-- Body -->
+                        <tr>
+                            <td style="padding: 40px 30px;">
+                                <p style="text-align: center; font-style: italic; color: #888888; font-size: 12px; margin-bottom: 30px;">VERSION FRANÇAISE CI-DESSOUS</p>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">You've Joined a New Team!</h2>
+                                <p style="color: #555555; line-height: 1.5;">Hello,</p>
+                                <p style="color: #555555; line-height: 1.5;">You have been added to a new team on the ChefTips platform. You can log in to the application to see the details.</p>
+                                <p style="color: #555555; line-height: 1.5;">Best regards,<br/>The ChefTips Team</p>
+                                
+                                <hr style="border: 0; border-top: 1px solid #dddddd; margin: 40px 0;"/>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">Vous avez rejoint une nouvelle équipe !</h2>
+                                <p style="color: #555555; line-height: 1.5;">Bonjour,</p>
+                                <p style="color: #555555; line-height: 1.5;">Vous faites maintenant partie d'une nouvelle équipe sur la plateforme ChefTips. Vous pouvez vous connecter à l'application pour voir les détails.</p>
+                                <p style="color: #555555; line-height: 1.5;">Cordialement,<br/>L'équipe ChefTips</p>
+                            </td>
+                        </tr>
+                        <!-- Footer -->
+                        <tr>
+                            <td align="center" style="padding: 20px 30px; background-color: #eeeeee;">
+                                <p style="margin: 0; color: #888888; font-size: 12px;">&copy; 2025 ChefTips. All rights reserved.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+    </html>`,
                     };
                     await transporter.sendMail(mailOptions);
                     
@@ -238,8 +490,60 @@ const AuthController = {
                     const mailOptions = {
                         from: process.env.SMTP_FROM_EMAIL,
                         to: email,
-                        subject: "Vous êtes invité à rejoindre une équipe !",
-                        html: `<p>Bonjour,</p><p>Vous avez été invité à rejoindre une équipe. Utilisez le code ci-dessous dans l'application pour finaliser votre inscription :</p><h2>${code}</h2>`,
+                        subject: "You're invited to join a team! / Vous êtes invité(e) à rejoindre une équipe !",
+                        html: `<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>You're Invited / Vous êtes invité(e)</title>
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td style="padding: 20px 0;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; background-color: #ffffff; border: 1px solid #cccccc;">
+                        <!-- Header -->
+                        <tr>
+                            <td align="center" style="padding: 40px 0; background-color: #1b2646ff; color: #ffffff;">
+                                <h1 style="margin: 0; font-size: 24px;">ChefTips</h1>
+                            </td>
+                        </tr>
+                        <!-- Body -->
+                        <tr>
+                            <td style="padding: 40px 30px;">
+                                <p style="text-align: center; font-style: italic; color: #888888; font-size: 12px; margin-bottom: 30px;">VERSION FRANÇAISE CI-DESSOUS</p>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">You're Invited!</h2>
+                                <p style="color: #555555; line-height: 1.5;">Hello,</p>
+                                <p style="color: #555555; line-height: 1.5;">You have been invited to join a team on ChefTips. To complete your registration, please use the following code in the application:</p>
+                                <div style="background-color: #f0f0f0; border: 1px dashed #cccccc; padding: 20px; text-align: center; margin: 20px 0;">
+                                    <h2 style="margin: 0; font-size: 32px; letter-spacing: 4px; color: #1b2646ff;">${code}</h2>
+                                </div>
+                                <p style="color: #555555; line-height: 1.5;">Best regards,<br/>The ChefTips Team</p>
+                                
+                                <hr style="border: 0; border-top: 1px solid #dddddd; margin: 40px 0;"/>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">Vous êtes invité(e) !</h2>
+                                <p style="color: #555555; line-height: 1.5;">Bonjour,</p>
+                                <p style="color: #555555; line-height: 1.5;">Vous avez été invité(e) à rejoindre une équipe sur ChefTips. Pour finaliser votre inscription, veuillez utiliser le code suivant dans l'application :</p>
+                                <div style="background-color: #f0f0f0; border: 1px dashed #cccccc; padding: 20px; text-align: center; margin: 20px 0;">
+                                    <h2 style="margin: 0; font-size: 32px; letter-spacing: 4px; color: #1b2646ff;">${code}</h2>
+                                </div>
+                                <p style="color: #555555; line-height: 1.5;">Cordialement,<br/>L'équipe ChefTips</p>
+                            </td>
+                        </tr>
+                        <!-- Footer -->
+                        <tr>
+                            <td align="center" style="padding: 20px 30px; background-color: #eeeeee;">
+                                <p style="margin: 0; color: #888888; font-size: 12px;">&copy; 2025 ChefTips. All rights reserved.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+    </html>`,
                     };
                     await transporter.sendMail(mailOptions);
                     return res.status(200).json({ message: "Invitation re-sent successfully." });
@@ -258,8 +562,60 @@ const AuthController = {
             const mailOptions = {
                 from: process.env.SMTP_FROM_EMAIL,
                 to: email,
-                subject: "Vous êtes invité à rejoindre une équipe !",
-                html: `<p>Bonjour,</p><p>Vous avez été invité à rejoindre une équipe. Utilisez le code ci-dessous dans l'application pour finaliser votre inscription :</p><h2>${code}</h2>`,
+                subject: "You're invited to join a team! / Vous êtes invité(e) à rejoindre une équipe !",
+                html: `<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>You're Invited / Vous êtes invité(e)</title>
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td style="padding: 20px 0;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; background-color: #ffffff; border: 1px solid #cccccc;">
+                        <!-- Header -->
+                        <tr>
+                            <td align="center" style="padding: 40px 0; background-color: #1b2646ff; color: #ffffff;">
+                                <h1 style="margin: 0; font-size: 24px;">ChefTips</h1>
+                            </td>
+                        </tr>
+                        <!-- Body -->
+                        <tr>
+                            <td style="padding: 40px 30px;">
+                                <p style="text-align: center; font-style: italic; color: #888888; font-size: 12px; margin-bottom: 30px;">VERSION FRANÇAISE CI-DESSOUS</p>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">You're Invited!</h2>
+                                <p style="color: #555555; line-height: 1.5;">Hello,</p>
+                                <p style="color: #555555; line-height: 1.5;">You have been invited to join a team on ChefTips. To complete your registration, please use the following code in the application:</p>
+                                <div style="background-color: #f0f0f0; border: 1px dashed #cccccc; padding: 20px; text-align: center; margin: 20px 0;">
+                                    <h2 style="margin: 0; font-size: 32px; letter-spacing: 4px; color: #1b2646ff;">${code}</h2>
+                                </div>
+                                <p style="color: #555555; line-height: 1.5;">Best regards,<br/>The ChefTips Team</p>
+                                
+                                <hr style="border: 0; border-top: 1px solid #dddddd; margin: 40px 0;"/>
+                                
+                                <h2 style="color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">Vous êtes invité(e) !</h2>
+                                <p style="color: #555555; line-height: 1.5;">Bonjour,</p>
+                                <p style="color: #555555; line-height: 1.5;">Vous avez été invité(e) à rejoindre une équipe sur ChefTips. Pour finaliser votre inscription, veuillez utiliser le code suivant dans l'application :</p>
+                                <div style="background-color: #f0f0f0; border: 1px dashed #cccccc; padding: 20px; text-align: center; margin: 20px 0;">
+                                    <h2 style="margin: 0; font-size: 32px; letter-spacing: 4px; color: #1b2646ff;">${code}</h2>
+                                </div>
+                                <p style="color: #555555; line-height: 1.5;">Cordialement,<br/>L'équipe ChefTips</p>
+                            </td>
+                        </tr>
+                        <!-- Footer -->
+                        <tr>
+                            <td align="center" style="padding: 20px 30px; background-color: #eeeeee;">
+                                <p style="margin: 0; color: #888888; font-size: 12px;">&copy; 2025 ChefTips. All rights reserved.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+    </html>`,
             };
             await transporter.sendMail(mailOptions);
 
