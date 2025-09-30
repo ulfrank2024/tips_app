@@ -1,0 +1,11 @@
+# Variables d'environnement
+.env
+
+# Dépendances Node.js
+node_modules/
+
+# Logs Docker
+*.log
+
+# Fichiers de configuration spécifiques à l'OS
+.DS_Store
