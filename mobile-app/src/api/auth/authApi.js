@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_BASE_URL = "http://10.0.0.230:4000/api/auth"; // Pour simulateur iOS. Pour émulateur Android, utilisez 'http://10.0.2.2:4000/api/auth'. Pour appareil physique, utilisez l'IP de votre machine (ex: 'http://10.0.0.230:4000/api/auth'). // Remplacez par l'adresse IP de votre machine si nécessaire
+const API_BASE_URL = "https://bttft2mmk7.us-east-1.awsapprunner.com/api/auth"; // Pour simulateur iOS. Pour émulateur Android, utilisez 'http://10.0.2.2:4000/api/auth'. Pour appareil physique, utilisez l'IP de votre machine (ex: 'http://10.0.0.230:4000/api/auth'). // Remplacez par l'adresse IP de votre machine si nécessaire
 
 const handleResponse = async (response) => {
     const data = await response.json();
