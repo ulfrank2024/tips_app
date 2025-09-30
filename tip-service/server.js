@@ -24,6 +24,12 @@ app.set('transporter', transporter);
 app.use("/api/tips", tipRoutes);
 
 const PORT = process.env.PORT || 4001; // Using a different port than auth-service
-app.listen(PORT, () => {
-    console.log(`Tip service started on port ${PORT}`);
-});
+
+// Start the server only if this file is run directly
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Tip service started on port ${PORT}`);
+    });
+}
+
+module.exports = app;

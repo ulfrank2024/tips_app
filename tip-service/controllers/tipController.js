@@ -64,7 +64,7 @@ const TipController = {
             // Add employees to the newly created pool
             const poolEmployees = await TipModel.addEmployeesToPool(newPool.id, employees);
 
-            res.status(201).json({ message: "Pool created successfully.", pool: newPool, employees: poolEmployees });
+            res.status(201).json({ success_code: "POOL_CREATED_SUCCESSFULLY", pool: newPool, employees: poolEmployees });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
@@ -98,7 +98,7 @@ const TipController = {
             const updatedPool = await TipModel.updateTipPool(poolId, updates);
 
 
-            res.status(200).json({ message: "Pool updated successfully.", pool: updatedPool });
+            res.status(200).json({ success_code: "POOL_UPDATED_SUCCESSFULLY", pool: updatedPool });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
@@ -249,7 +249,7 @@ const TipController = {
                 }
             }
 
-            res.status(200).json({ message: "Distribution calculated and stored successfully.", distributions: storedDistributions });
+            res.status(200).json({ success_code: "DISTRIBUTION_CALCULATED_SUCCESSFULLY", distributions: storedDistributions });
 
         } catch (err) {
             console.error(err);

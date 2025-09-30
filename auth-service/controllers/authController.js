@@ -22,7 +22,7 @@ const AuthController = {
         }
         try {
             const company = await AuthModel.createCompany(name);
-            res.status(201).json({ message: "Company created successfully.", company });
+            res.status(201).json({ success_code: "COMPANY_CREATED_SUCCESSFULLY", company });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
@@ -48,7 +48,7 @@ const AuthController = {
                 };
                 await transporter.sendMail(mailOptions);
                 return res.status(200).json({
-                    message: "Account already exists but email is not verified. A new verification code has been sent to your email.",
+                    success_code: "EMAIL_NOT_VERIFIED_RESEND_OTP",
                 });
             }
 
@@ -115,7 +115,7 @@ const AuthController = {
             };
             await transporter.sendMail(mailOptions);
             res.status(201).json({
-                message: "Manager account created. A verification code has been sent to your email.",
+                success_code: "SIGNUP_SUCCESS_VERIFICATION_SENT",
             });
         } catch (err) {
             console.error(err);
@@ -194,10 +194,10 @@ const AuthController = {
     </html>`,
             };
             await transporter.sendMail(mailOptions);
-            res.status(200).json({ message: "Email vérifié avec succès !" });
+            res.status(200).json({ success_code: "EMAIL_VERIFIED_SUCCESSFULLY" });
         } catch (err) {
             console.error(err);
-            res.status(500).json({ error: "Erreur serveur interne." });
+            res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
         }
     },
 
@@ -271,10 +271,10 @@ const AuthController = {
     </html>`,
             };
             await transporter.sendMail(mailOptions);
-            res.status(200).json({ message: "Un nouveau code a été envoyé." });
+            res.status(200).json({ success_code: "OTP_RESENT_SUCCESSFULLY" });
         } catch (err) {
             console.error(err);
-            res.status(500).json({ error: "Erreur serveur interne." });
+            res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
         }
     },
 
@@ -297,10 +297,10 @@ const AuthController = {
             }
             const payload = { id: user.id, role: user.role, company_id: user.company_id };
             const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
-            res.status(200).json({ message: "Connexion réussie.", token, user });
+            res.status(200).json({ success_code: "LOGIN_SUCCESSFUL", token, user });
         } catch (err) {
             console.error(err);
-            res.status(500).json({ error: "Erreur serveur interne." });
+            res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
         }
     },
 
@@ -377,10 +377,10 @@ const AuthController = {
     </html>`,
             };
             await transporter.sendMail(mailOptions);
-            res.status(200).json({ message: "Password reset link sent successfully." });
+            res.status(200).json({ success_code: "PASSWORD_RESET_LINK_SENT" });
         } catch (err) {
             console.error(err);
-            res.status(500).json({ error: "Erreur serveur interne." });
+            res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
         }
     },
 
@@ -400,10 +400,10 @@ const AuthController = {
             }
             await AuthModel.updatePassword(user.id, password);
             await AuthModel.deletePasswordResetOtp(user.id, otp);
-            res.status(200).json({ message: "Mot de passe mis à jour avec succès." });
+            res.status(200).json({ success_code: "PASSWORD_UPDATE_SUCCESS" });
         } catch (err) {
             console.error(err);
-            res.status(500).json({ error: "Erreur serveur interne." });
+            res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
         }
     },
 
@@ -481,7 +481,7 @@ const AuthController = {
                     };
                     await transporter.sendMail(mailOptions);
                     
-                    return res.status(200).json({ message: "Existing employee added to your company." });
+                    return res.status(200).json({ success_code: "EXISTING_EMPLOYEE_ADDED" });
                 }
                 // Case 3: User exists but never finished initial setup.
                 else {
@@ -546,7 +546,7 @@ const AuthController = {
     </html>`,
                     };
                     await transporter.sendMail(mailOptions);
-                    return res.status(200).json({ message: "Invitation re-sent successfully." });
+                    return res.status(200).json({ success_code: "INVITATION_RESENT_SUCCESSFULLY" });
                 }
             }
 
@@ -619,7 +619,7 @@ const AuthController = {
             };
             await transporter.sendMail(mailOptions);
 
-            res.status(200).json({ message: "Invitation sent successfully." });
+            res.status(200).json({ success_code: "INVITATION_SENT_SUCCESSFULLY" });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
@@ -640,7 +640,7 @@ const AuthController = {
             await AuthModel.updateUserName(tokenData.user_id, firstName, lastName);
             await AuthModel.validateUserEmail(tokenData.user_id);
             await AuthModel.deletePasswordSetupToken(token);
-            res.status(200).json({ message: "Password set up successfully." });
+            res.status(200).json({ success_code: "PASSWORD_SETUP_SUCCESS" });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
@@ -663,7 +663,7 @@ const AuthController = {
             }
             const token = await AuthModel.createPasswordSetupToken(user.id);
             await AuthModel.deleteInvitationCode(user.id, code);
-            res.status(200).json({ message: "Invitation code verified.", setupToken: token });
+            res.status(200).json({ success_code: "INVITATION_VERIFIED", setupToken: token });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
@@ -696,7 +696,7 @@ const AuthController = {
                 return res.status(404).json({ error: "EMPLOYEE_NOT_FOUND_IN_COMPANY" });
             }
             const unlinkedUser = await AuthModel.unlinkUserFromCompany(employeeId);
-            res.status(200).json({ message: "Employee unlinked successfully.", user: unlinkedUser });
+            res.status(200).json({ success_code: "EMPLOYEE_UNLINKED_SUCCESSFULLY", user: unlinkedUser });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
@@ -730,7 +730,7 @@ const AuthController = {
                 return res.status(401).json({ error: "INVALID_CURRENT_PASSWORD" });
             }
             await AuthModel.updatePassword(userId, newPassword);
-            res.status(200).json({ message: "Password changed successfully." });
+            res.status(200).json({ success_code: "PASSWORD_CHANGE_SUCCESS" });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
@@ -749,7 +749,7 @@ const AuthController = {
                 return res.status(404).json({ error: "USER_NOT_FOUND" });
             }
             const updatedUser = await AuthModel.findUserById(userId);
-            res.status(200).json({ message: "Profile updated successfully.", user: updatedUser });
+            res.status(200).json({ success_code: "PROFILE_UPDATE_SUCCESS", user: updatedUser });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
@@ -767,7 +767,7 @@ const AuthController = {
         }
         try {
             const category = await AuthModel.createCategory(company_id, name, description, effects_supplements);
-            res.status(201).json({ message: "Category created successfully.", category });
+            res.status(201).json({ success_code: "CATEGORY_CREATED_SUCCESSFULLY", category });
         } catch (err) {
             console.error(err);
             if (err.code === '23505') {
@@ -825,7 +825,7 @@ const AuthController = {
                 return res.status(404).json({ error: "CATEGORY_NOT_FOUND" });
             }
             const updatedCategory = await AuthModel.updateCategory(categoryId, name, description, effects_supplements);
-            res.status(200).json({ message: "Category updated successfully.", category: updatedCategory });
+            res.status(200).json({ success_code: "CATEGORY_UPDATED_SUCCESSFULLY", category: updatedCategory });
         } catch (err) {
             console.error(err);
             if (err.code === '23505') {
@@ -847,7 +847,7 @@ const AuthController = {
                 return res.status(404).json({ error: "CATEGORY_NOT_FOUND" });
             }
             await AuthModel.deleteCategory(categoryId);
-            res.status(200).json({ message: "Category deleted successfully." });
+            res.status(200).json({ success_code: "CATEGORY_DELETED_SUCCESSFULLY" });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
@@ -871,7 +871,7 @@ const AuthController = {
                 return res.status(400).json({ error: "INVALID_CATEGORY_ID" });
             }
             const updatedUser = await AuthModel.updateUserCategory(userId, category_id);
-            res.status(200).json({ message: "User category updated successfully.", user: updatedUser });
+            res.status(200).json({ success_code: "USER_CATEGORY_UPDATED_SUCCESSFULLY", user: updatedUser });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: "INTERNAL_SERVER_ERROR" });
